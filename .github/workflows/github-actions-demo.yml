@@ -1,18 +1,36 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
-jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
+name: GitHub Actions Demo # Defines the name of the workflow
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀 # Dynamically sets the run name using the GitHub actor (the person who triggered the workflow)
+
+on: [push] # The workflow is triggered when there is a push event to the repository
+
+jobs: # Defines a set of jobs to be executed in this workflow
+  Explore-GitHub-Actions: # This is the name of the first job
+    runs-on: ubuntu-latest # Specifies that this job will run on an Ubuntu-based GitHub-hosted runner
+    
+    steps: # Each job consists of multiple steps that execute sequentially
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+        # Prints a message indicating which GitHub event (e.g., push, pull request) triggered the job
+      
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+        # Outputs the operating system of the runner (should be Ubuntu in this case)
+      
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+        # Displays the branch name and repository name dynamically
+      
       - name: Check out repository code
         uses: actions/checkout@v4
+        # This is a predefined GitHub Action that checks out (clones) the repository to the runner
+      
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+        # Confirms that the repository has been successfully cloned
+      
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+        # Indicates that the setup is complete and code can now be tested
+      
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+        # Lists all files in the repository directory inside the runner
+      
       - run: echo "🍏 This job's status is ${{ job.status }}."
+        # Displays the final status of the job (e.g., success, failure)
